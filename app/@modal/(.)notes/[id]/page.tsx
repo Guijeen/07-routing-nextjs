@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import NotePreviewClient from "./NotePreviewClientв";
+import NotePreviewClient from "./NotePreview.client";
 
 import { fetchNoteById } from "@/lib/api";
 
