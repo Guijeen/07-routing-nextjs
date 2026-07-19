@@ -27,9 +27,6 @@ export default function NotePreviewClient({ id }: NotePreviewClientProps) {
     router.back();
   };
 
-  if (isLoading) return null;
-  if (error || !note) return null;
-
   return (
     <Modal isOpen={true} onClose={handleClose}>
       {isLoading && (
