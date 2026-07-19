@@ -11,6 +11,7 @@ import Modal from "@/components/Modal/Modal";
 import css from "./NotesPage.module.css";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import dynamic from "next/dynamic";
+import type { NoteTag } from "@/types/note";
 
 const Pagination = dynamic(() => import("@/components/Pagination/Pagination"), {
   ssr: false,
@@ -20,7 +21,7 @@ const Pagination = dynamic(() => import("@/components/Pagination/Pagination"), {
 const PER_PAGE = 12;
 
 type PropsNotesClient = {
-  category: string | undefined;
+  category: NoteTag;
 };
 
 export default function NotesClient({ category }: PropsNotesClient) {

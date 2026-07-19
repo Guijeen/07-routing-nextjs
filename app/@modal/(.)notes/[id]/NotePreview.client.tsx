@@ -20,6 +20,7 @@ export default function NotePreviewClient({ id }: NotePreviewClientProps) {
   } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
+    refetchOnMount: false,
   });
 
   const handleClose = () => {
@@ -31,14 +32,35 @@ export default function NotePreviewClient({ id }: NotePreviewClientProps) {
 
   return (
     <Modal isOpen={true} onClose={handleClose}>
-      <div className={css.previewContainer}>
-        <h2 className={css.title}>{note.title}</h2>
-        <p className={css.content}>{note.content}</p>
+      {isLoading && (
+        <div className={css.loadingStatus}>
+          <p>Loading note details...</p>
+        </div>
+      )}
 
-        <button className={css.closeBtn} onClick={handleClose}>
-          Close
-        </button>
-      </div>
+      {error && (
+        <div className={css.errorStatus}>
+          <p>Failed to load note. Please try again later.</p>
+        </div>
+      )}
+
+      {note && (
+        <main className={css.main}>
+          <div className={css.container}>
+            <div className={css.item}>
+              <div className={css.header}>
+                <h2>{note?.title}</h2>
+              </div>
+              <p className={css.tag}>{note?.tag}</p>
+              <p className={css.content}>{note?.content}</p>
+              <p className={css.date}>{note?.createdAt}</p>
+            </div>
+          </div>
+          <button className={css.closeBtn} onClick={handleClose}>
+            Close
+          </button>
+        </main>
+      )}
     </Modal>
   );
 }

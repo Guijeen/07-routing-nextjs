@@ -21,7 +21,7 @@ export interface FetchNotesParams {
   page: number;
   perPage: number;
   search?: string;
-  tag?: string;
+  tag?: NoteTag;
 }
 
 export interface CreateNotePayload {
@@ -48,13 +48,11 @@ export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
 };
 
 export const deleteNote = async (id: string): Promise<Note> => {
-  console.log(id);
-
   const response = await notehubApi.delete<Note>(`/notes/${id}`);
   return response.data;
 };
 
-export const fetchNoteById = async (id: string) => {
+export const fetchNoteById = async (id: string): Promise<Note> => {
   const response = await notehubApi.get<Note>(`/notes/${id}`);
 
   return response.data;
